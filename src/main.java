@@ -1,44 +1,46 @@
-import listasLineares.MyArrayList;
+import listasLineares.MyStack;
+import listasLineares.MyQueue;
+
 
 public class main {
 
     public static void main(String[] args) {
-        MyArrayList<String> l = new MyArrayList<>(2);
+        MyStack<Integer> stack = new MyStack<>();
 
+        stack.push(10);
+        stack.push(15);
+        stack.push(30);
 
-        l.add("A"); l.add("B");
-        assert l.tam() == 2;
-        assert l.get(0).equals("A");
-        assert l.get(1).equals("B");
+        System.out.println(stack.pop());
+        System.out.println(stack.pop());
 
-        l.add(1, "X"); // [A, X, B]
-        assert l.tam() == 3;
-        assert l.get(1).equals("X");
+        System.out.println(stack.isEmpty());
+        stack.clear();
+        System.out.println(stack.isEmpty());
 
-        assert l.contains("X");
-        assert l.indexOf("B") == 2;
+        System.out.println("---------------------------------------------------------");
 
-        String r1 = l.remove(1); // remove "X"
-        assert r1.equals("X");
+        MyQueue<Integer> queue = new MyQueue<>();
 
-        assert !l.remove("Z");
-        assert l.remove("A");
+        System.out.println("Fila vazia? " + queue.isEmpty());
 
-        String old = l.set(0, "Q"); // [Q]
-        assert old.equals("B");
-        assert l.get(0).equals("Q");
+        queue.enqueue(10);
+        queue.enqueue(20);
+        queue.enqueue(30);
 
-        l.add(null);
-        assert l.contains(null);
-        Object[] arr = l.toArray();
-        assert arr.length == l.tam();
+        System.out.println("Fila vazia? " + queue.isEmpty());
 
-        // limites
-        try { l.get(99); assert false : "Era pra lançar exceção"; } catch (IndexOutOfBoundsException expected) {}
-        try { l.add(-1, "oops"); assert false; } catch (IndexOutOfBoundsException expected) {}
-        try { l.add(l.tam()+1, "oops"); assert false; } catch (IndexOutOfBoundsException expected) {}
+        System.out.println("Saiu: " + queue.dequeue());
+        System.out.println("Saiu: " + queue.dequeue());
 
-        System.out.println("Todos os testes passaram! Lista: " + l);
+        queue.enqueue(40);
+        queue.enqueue(50);
+
+        System.out.println("Saiu: " + queue.dequeue());
+        System.out.println("Saiu: " + queue.dequeue());
+        System.out.println("Saiu: " + queue.dequeue());
+
+        System.out.println("Fila vazia? " + queue.isEmpty());
     }
 
 }
